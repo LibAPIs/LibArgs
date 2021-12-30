@@ -5,21 +5,36 @@
 
 	<organization>
 		<name>MClarkDev.com</name>
-		<url>https://tools.mclarkdev.com/tools</url>
+		<url>https://about.mclarkdev.com/</url>
 	</organization>
 
 	<groupId>com.mclarkdev.tools</groupId>
 	<artifactId>libargs</artifactId>
-	<version>PRERELEASE</version>
+	<version>1.1</version>
 	<packaging>jar</packaging>
 
 	<name>libargs</name>
-	<url>https://www.mclarkdev.com/tools/libargs</url>
+	<url>https://about.mclarkdev.com/posts/1097/libapis/</url>
 	<description>A generic argument parser.</description>
 
 	<scm>
 		<url>https://git.mclarkdev.com/MClarkDev.com--Public/libargs.git</url>
 	</scm>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Matt Clark</name>
+			<email>matt@mclarkdev.com</email>
+			<url>https://about.mclarkdev.com/</url>
+		</developer>
+	</developers>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -52,6 +67,20 @@
 						<id>attach-javadocs</id>
 						<goals>
 							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
 						</goals>
 					</execution>
 				</executions>
