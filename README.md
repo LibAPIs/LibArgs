@@ -1,6 +1,6 @@
 # LibArgs
 
- A simple helper library for processing command line arguments.
+A simple helper library for processing command line arguments.
 
 ## Maven Dependency
 
@@ -31,4 +31,3 @@ Then run your application with the desired argumentsi, accessing the values in c
 $ java -jar myApp.jar --name Matt
 My name is Matt.
 ```
-
