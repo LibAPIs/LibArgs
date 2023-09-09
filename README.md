@@ -1,6 +1,6 @@
 # LibArgs
 
-A simple helper library for processing command line arguments.
+A simple java helper library for processing command line arguments.
 
 ## Maven Dependency
 
@@ -10,7 +10,7 @@ Include the library in your project by adding the following dependency to your p
 <dependency>
 	<groupId>com.mclarkdev.tools</groupId>
 	<artifactId>libargs</artifactId>
-	<version>1.1</version>
+	<version>1.5.1</version>
 </dependency>
 ```
 
@@ -20,14 +20,18 @@ Initialize the library by using the array of arguments passed into the main clas
 
 ```
 public static void main(String[] args) {
-	LibArgs libArgs = new LibArgs(args);
-	System.out.printf("My name is %s.", libArgs.getString("name"));
+	LibArgs.instance().parse(args);
+	System.out.printf("Hello, %s.", LibArgs.instance().getString("name"));
 }
 ```
 
-Then run your application with the desired argumentsi, accessing the values in code.
+Then simply run your application with the desired arguments:
 
 ```
-$ java -jar myApp.jar --name Matt
-My name is Matt.
+$ java -jar myApp.jar --name world
+Hello, world.
 ```
+
+# License
+
+Open source & free for all. ❤
