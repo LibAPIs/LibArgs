@@ -2,6 +2,12 @@ package com.mclarkdev.tools.libargs;
 
 import java.util.ArrayList;
 
+/**
+ * LibArgs // LibArgs
+ * 
+ * A simple java helper library for processing command line arguments.
+ *
+ */
 public class LibArgs {
 
 	private static final LibArgs libArgs = new LibArgs(null);;

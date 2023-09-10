@@ -13,7 +13,7 @@
 
 	<name>libargs</name>
 	<url>https://git.mclarkdev.com/LibAPIs/LibArgs.git</url>
-	<description>A generic argument parser.</description>
+	<description>A simple java helper library for processing command line arguments.</description>
 
 	<scm>
 		<url>https://git.mclarkdev.com/LibAPIs/LibArgs.git</url>
