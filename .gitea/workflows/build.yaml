@@ -17,9 +17,8 @@ jobs:
         repo-token: ${{ secrets.GIT_TOKEN }}     
     - name: Build artifacts with Maven
       run: mvn clean install -Dgpg.passphrase="${{ secrets.GPG_PASS }}"
-    - name: List files in the repository
-      run: |
-        find ${{ github.workspace }}
+    - name: Publish artifacts
+      run: mvn deploy
     - name: Archive job artifacts
       uses: actions/upload-artifact@v3
       with:
