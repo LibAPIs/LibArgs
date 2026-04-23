@@ -6,7 +6,8 @@ import java.util.ArrayList;
  * LibArgs // LibArgs
  * 
  * A simple java helper library for processing command line arguments.
- *
+ * 
+ * @author Matthew R. Clark (MClarkDev.com, 2021-2026)
  */
 public class LibArgs {
 
@@ -52,6 +53,33 @@ public class LibArgs {
 	}
 
 	/**
+	 * Returns the index of the given key.
+	 * 
+	 * @param key the parameter key
+	 * @return the index of the key, or -1
+	 */
+	public int indexOf(String key) {
+
+		for (int x = 0; x < args.size(); x++) {
+			if (String.format("--%s", key).equals(args.get(x))) {
+				return x;
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 * Returns true if the given parameter is set.
+	 * 
+	 * @param key the parameter key
+	 * @return parameter is set
+	 */
+	public boolean isSet(String key) {
+
+		return (indexOf(key) >= 0);
+	}
+
+	/**
 	 * Retrieve a string parameter from the parsed arguments.
 	 * 
 	 * @param key the parameter key
@@ -70,18 +98,21 @@ public class LibArgs {
 	 */
 	public String getString(String key, String defVal) {
 
-		for (int x = 0; x < args.size(); x++) {
+		// Get the index of the key
+		int index = indexOf(key);
 
-			if (!String.format("--%s", key).equals(args.get(x))) {
-				continue;
-			}
-			x++;
-			if (x >= args.size()) {
-				throw new IllegalArgumentException("argument missing value");
-			}
-			return args.get(x);
+		// Default if not set
+		if (index == -1) {
+			return defVal;
 		}
-		return defVal;
+
+		// Fail if out of bounds
+		if ((index + 1) >= args.size()) {
+			throw new IllegalArgumentException("argument missing value");
+		}
+
+		// Get and return the value
+		return args.get((index + 1));
 	}
 
 	/**
@@ -92,10 +123,42 @@ public class LibArgs {
 	 * @return parameter value, or default
 	 */
 	public int getInteger(String key, int defVal) {
+
+		// Get value as string
+		String value = getString(key, //
+				Integer.toString(defVal));
 		try {
-			return Integer.parseInt(getString(key, Integer.toString(defVal)));
+
+			// Return parsed at integer
+			return Integer.parseInt(value);
 		} catch (Exception e) {
-			throw new IllegalArgumentException("bad value for key");
+
+			// Throw parse failure
+			throw new IllegalArgumentException(//
+					String.format("%s=%s (!integer)", key, value));
+		}
+	}
+
+	/**
+	 * Retrieve a double parameter from the parsed arguments.
+	 * 
+	 * @param key    the parameter key
+	 * @param defVal default value
+	 * @return parameter value, or default
+	 */
+	public double getDouble(String key, double defVal) {
+
+		// Get value as string
+		String value = getString(key, Double.toString(defVal));
+		try {
+
+			// Return parsed as double
+			return Double.parseDouble(value);
+		} catch (Exception e) {
+
+			// Throw parse failure
+			throw new IllegalArgumentException(//
+					String.format("%s=%s (!double)", key, value));
 		}
 	}
 
@@ -103,17 +166,21 @@ public class LibArgs {
 	 * Retrieve a boolean value from the parsed arguments.
 	 * 
 	 * @param key the parameter key
-	 * @return parameter exists
+	 * @return parameter value, or default
 	 */
-	public boolean getBoolean(String key) {
+	public boolean getBoolean(String key, boolean defVal) {
 
-		for (int x = 0; x < args.size(); x++) {
+		// Get value as string
+		String value = getString(key, Boolean.toString(defVal));
+		try {
 
-			if (!String.format("--%s", key).equals(args.get(x))) {
-				continue;
-			}
-			return true;
+			// Return parsed at integer
+			return Boolean.parseBoolean(value);
+		} catch (Exception e) {
+
+			// Throw parse failure
+			throw new IllegalArgumentException(//
+					String.format("%s=%s (!boolean)", key, value));
 		}
-		return false;
 	}
 }
